@@ -8,14 +8,12 @@
 #include "SelfAdjustingList.h"
 #include <forward_list>
 #include <algorithm>    // std::random_shuffle
-#include <vector>       // std::vector
-#include <ctime>        // std::time
 #include <cstdlib>      // std::rand, std::srand
 #include <deque>
-using namespace std;
 
 int SelfAdjustingList::check(int f) const {
 	// TODO Chris
+	return 0;
 }
 
 int SelfAdjustingList::find(int f){
@@ -30,7 +28,6 @@ int SelfAdjustingList::find(int f){
 
 void SelfAdjustingList::uniqueRandomFill(int number, int lower, int upper) {
 	// TODO Meghan
-	std::forward_list<int> randomList;
 	std::deque<int> cleverName(1,lower);
 	int i(lower+1);
 	while (i<= upper)
@@ -42,7 +39,7 @@ void SelfAdjustingList::uniqueRandomFill(int number, int lower, int upper) {
 	int j(0);
 	while (j <= number)
 	{
-		randomList.push_front(cleverName.front());
+		SelfAdjustingList::data.push_front(cleverName.front());
 		cleverName.pop_back();
 		j++;
 	}
