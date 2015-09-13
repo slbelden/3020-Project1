@@ -17,7 +17,8 @@ int main() {
 
 	// initialization
 	SelfAdjustingList A = SelfAdjustingList();
-	A.uniqueRandomFill(1000, 0, 1000);
+	A.uniqueRandomFill(25, 0, 50);
+	A.print();
 	
 	// finding elements WITHOUT self-adjusting
 	// record both the total number of iterative steps

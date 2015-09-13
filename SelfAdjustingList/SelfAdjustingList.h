@@ -1,4 +1,4 @@
-// SelfAdjustingList.cpp
+// SelfAdjustingList.h
 // Stephen Belden
 // Chris Ruiz
 // Meghan Haukaas
@@ -7,6 +7,8 @@
 #pragma once
 
 #include <forward_list>
+
+// CR : I have implemented check, find, fill, and print.
 
 class SelfAdjustingList {
 private:
@@ -24,12 +26,13 @@ public:
 	// the requested entry is in the list. Returns a negative number if the entry
 	// is not in the list
 	// Bring the found element to the front of the list
-	int find(int f); 
+	int find(int f);
 
 	// Creates and fills this SelfAdjustingList with "number" new nodes with
 	// non-repeating random numbers from "lower" to "upper".
 	void uniqueRandomFill(int number, int lower, int upper);
-	// we either need to return a forward_list, or pass it a list
-	//		as a parameter
-	// forward_list uniqueRandomFill(int number, int lower, int upper);
+
+	// CR test functions
+	void fill(int f);
+	void print();
 };
