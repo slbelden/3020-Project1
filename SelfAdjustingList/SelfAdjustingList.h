@@ -29,4 +29,7 @@ public:
 	// Creates and fills this SelfAdjustingList with "number" new nodes with
 	// non-repeating random numbers from "lower" to "upper".
 	void uniqueRandomFill(int number, int lower, int upper);
+	// we either need to return a forward_list, or pass it a list
+	//		as a parameter
+	// forward_list uniqueRandomFill(int number, int lower, int upper);
 };
