@@ -1,0 +1,6 @@
+TODO:
+
+Finish writing explinations - Meghan
+Get cluster size = 1 to work - Stephen
+Copy the list so we can do multiple tests on the same initial random order - Chris
+Do tests and write doc about test - Colaborative
