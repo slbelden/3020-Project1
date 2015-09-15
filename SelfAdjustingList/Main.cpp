@@ -55,62 +55,64 @@ int main() {
 		SelfAdjustingList A = SelfAdjustingList();
 		A.uniqueRandomFill(inputSize, 0, upperBound);
 
-		// finding elements WITHOUT self-adjusting
-		// record both the total number of iterative steps
-		// and the total number of check() operations
-		/*std::cout << "Searching for numbers 0 to Upper Bound once each," << std::endl;
-		std::cout << "WITHOUT self-adjusting..." << std::endl;
-		long steps = 0;
-		for (int n = 0; n < upperBound; n++) {
-			int temp = A.check(n);
-			if (temp >= 1) steps += temp;
-			else steps += inputSize;
-		}
-		std::cout << "Done Checking in " << steps << " steps." << std::endl << std::endl;*/
-
-		// Clustered find
-		{
-			std::cout << "Finding elements in cluster WITHOUT self-adjusting..." << std::endl;
-			int current = 0;
-			long steps = 0;
-			int lower = (inputCluster - 1) / 2;
-			while (current < upperBound) {
-				current += rand() % inputCluster - lower;
-				if (current < 0)current = 0;
-				int temp = A.check(current);
-				if (temp >= 1) steps += temp;
-				else steps += inputSize;
+		if (inputCluster <= 1) { // Regular linear search
+			// record both the total number of iterative steps
+			// and the total number of check() operations
+			{ // new block to handle creating and deleting temp variables
+				std::cout << "Searching for numbers 0 to Upper Bound once each, WITHOUT self-adjusting..." << std::endl;
+				long steps = 0;
+				for (int n = 0; n < upperBound; n++) {
+					int temp = A.check(n);
+					if (temp >= 1) steps += temp;
+					else steps += inputSize;
+				}
+				std::cout << "Done with dumb search in " << steps << " steps." << std::endl << std::endl;
 			}
-			std::cout << "Done dumb search in " << steps << " steps." << std::endl << std::endl;
-		}
 
-		{
-			std::cout << "Finding elements in cluster and adjusting the list..." << std::endl;
-			int current = 0;
-			long steps = 0;
-			int lower = (inputCluster - 1) / 2;
-			while (current < upperBound) {
-				current += rand() % inputCluster - lower;
-				if (current < 0)current = 0;
-				int temp = A.find(current);
-				if (temp >= 1) steps += temp;
-				else steps += inputSize;
+			{
+				// record both the total number of iterative steps
+				// and the total number of find() operations
+				std::cout << "Searching for numbers 0 to Upper Bound once each, with self-adjusting..." << std::endl;
+				long steps = 0;
+				for (int n = 0; n < upperBound; n++) {
+					int temp = A.find(n);
+					if (temp >= 1) steps += temp;
+					else steps += inputSize;
+				}
+				std::cout << "Done with self-adjusting search in " << steps << " steps." << std::endl << std::endl;
 			}
-			std::cout << "Done with self-adjusting search in " << steps << " steps." << std::endl << std::endl;
 		}
+		else { // Clustered find
+			{ // new block to handle creating and deleting temp variables
+				std::cout << "Finding elements in cluster WITHOUT self-adjusting..." << std::endl;
+				int current = 0;
+				long steps = 0;
+				int lower = (inputCluster - 1) / 2;
+				while (current < upperBound) {
+					current += rand() % inputCluster - lower;
+					if (current < 0)current = 0;
+					int temp = A.check(current);
+					if (temp >= 1) steps += temp;
+					else steps += inputSize;
+				}
+				std::cout << "Done with dumb search in " << steps << " steps." << std::endl << std::endl;
+			}
 
-		// finding elements using the self-adjusting list
-		// record both the total number of iterative steps
-		// and the total number of find() operations
-		//std::cout << "Searching for numbers 0 to Upper Bound once each," << std::endl;
-		//std::cout << "WITHOUT self-adjusting..." << std::endl;
-		//steps = 0;
-		//for (int n = 0; n < upperBound; n++) {
-		//	int temp = A.find(n);
-		//	if (temp >= 1) steps += temp;
-		//	else steps += inputSize;
-		//}
-		//std::cout << "Done Finding in " << steps << " steps." << std::endl << std::endl;
+			{
+				std::cout << "Finding elements in cluster and adjusting the list..." << std::endl;
+				int current = 0;
+				long steps = 0;
+				int lower = (inputCluster - 1) / 2;
+				while (current < upperBound) {
+					current += rand() % inputCluster - lower;
+					if (current < 0)current = 0;
+					int temp = A.find(current);
+					if (temp >= 1) steps += temp;
+					else steps += inputSize;
+				}
+				std::cout << "Done with self-adjusting search in " << steps << " steps." << std::endl << std::endl;
+			}
+		}
 
 		std::cout << std::endl;
 		std::cout << "////////////////////          PROGRAM REPEATS...          ////////////////////" << std::endl;
