@@ -23,8 +23,12 @@ int main() {
 	std::cout << std::endl << "Input the desired maximum value for the list. Unique, non-repeating, random" << std::endl;
 	std::cout << "numbers will be added to the list from 0 to this value: ";
 	std::cin >> upperBound;
-	std::cout << std::endl << "Input the cluster size. (Explination here): ";
+	std::cout << std::endl << "Input the cluster size.";
+	std::cout << std::endl << "Values in within this cluster size will be randomly generated and found.";
+	std::cout << std::endl << "Cluster size serves as a “pivot”? for the cluster with 1 or 2 more values"
+	std::cout << std::endl << "greater than cluster size than values less than cluster size.";
 	std::cin >> inputCluster;
+	// MH: Let me know if you think we need anythong else here!
 	std::cout << std::endl << "The same random order is used for each test." << std::endl;
 
 	// ask the user how long the test list should be,
