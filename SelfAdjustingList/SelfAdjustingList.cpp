@@ -18,12 +18,12 @@ int SelfAdjustingList::check(int f) const {
 	bool matched = false;
 
 	while (it != data.end()) {
+		steps++;
 		if (*it == f) {
 			matched = true;
 			break;
 		}
 		it++;
-		steps++;
 	}
 
 	if (!matched) {
@@ -40,13 +40,13 @@ int SelfAdjustingList::find(int f) {
 	bool matched = false;
 
 	while (it != data.end()) {
+		steps++;
 		if (*it == f) {
 			matched = true;
 			break;
 		}
 		it++;
 		it_prev++;
-		steps++;
 	}
 
 	if (!matched) {
