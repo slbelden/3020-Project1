@@ -8,11 +8,10 @@
 
 #include <forward_list>
 
-// CR : I have implemented check, find, fill, and print.
-
 class SelfAdjustingList {
 private:
 	std::forward_list<int> data = std::forward_list<int>();
+
 public:
 	// Params: an Int to be searched for
 	// Returns the non-negative number of entries that were itterated through if 
@@ -32,7 +31,7 @@ public:
 	// non-repeating random numbers from "lower" to "upper".
 	void uniqueRandomFill(int number, int lower, int upper);
 
-	// CR test functions
+	// Test functions
 	void fill(int f);
 	void print();
 };
