@@ -13,7 +13,7 @@ int main() {
 	while (1) {
 		int inputSize = 0;
 		int upperBound = 0;
-		int inputCluster = 0;
+		int clusterRadius = 0;
 
 		// Only display this intro text on the first run through the program
 		if (cycles <= 0) {
@@ -22,10 +22,22 @@ int main() {
 			std::cout << "that list both with and without the self-adjusting function of the list." << std::endl;
 			std::cout << "The same initial random order of elements is used for both tests." << std::endl;
 			std::cout << std::endl;
+			std::cout << "Explination of input variables:" << std::endl;
+			std::cout << "* List Length -    The length of the list. Must be non-negative integer." << std::endl;
+			std::cout << "                   (Recommended value 0-1000)" << std::endl;
+			std::cout << "* Max Value -      The list will be filled with unique, non-repeating, random" << std::endl;
+			std::cout << "                   numbers from 1 to this value." << std::endl;
+			std::cout << "                   Must be greater than or equal to List Length." << std::endl;
+			std::cout << "* Cluster Radius - While searching, the number being searched for may increace" << std::endl;
+			std::cout << "                   or decreace by a maximum of this ammount. This value also" << std::endl;
+			std::cout << "                   controls how long the cluster is centered around one value" << std::endl;
+			std::cout << "                   before going on to the next, somaking this value larger will" << std::endl;
+			std::cout << "                   result in more find calls." << std::endl;
+			std::cout << "                   (Recommended values 1-10, unless the list is small)" << std::endl;
+			std::cout << std::endl;
 			std::cout << "Some interesting values to try:" << std::endl;
-			std::cout << "* Equal list length and max value - ideal situation with no misses" << std::endl;
+			std::cout << "* Max Value 1 less than List Length - ideal situation with no misses" << std::endl;
 			std::cout << "* Max value much greater than list length - more misses than hits" << std::endl;
-			std::cout << "* Max value less than list length - should crash!!" << std::endl;
 			std::cout << "* Cluster size of 1 - plain linear search, no searches repeated" << std::endl;
 			std::cout << "* Large cluster size - more opportunities for the self-adjusting function to" << std::endl;
 			std::cout << "                     work effectively, which should widen the gap between tests." << std::endl;
@@ -33,90 +45,115 @@ int main() {
 		}
 
 		// Input section
-		std::cout << "Input the desired length of the list as a non-negative integer" << std::endl;
-		std::cout << "(Recommended values 0-1000): ";
+		std::cout << "List Length: ";
 		std::cin >> inputSize;
-		std::cout << std::endl << "Input the desired maximum value for the list. The list will be filled with" << std::endl;
-		std::cout << "unique, non-repeating, random numbers from 0 to this value: ";
+		std::cout << "Max Value: ";
 		std::cin >> upperBound;
-		std::cout << std::endl << "Input the cluster size.";
-		// Dear MH,
-		// I'm still confused. Also:
-		// Unicode quotation marks don't print properly in most consoles, use escaped ASCII quotes instead.
-		// Numbers like 1 or 2 probably shouldn't be mentioned, because the cluster size is unbound.
-		std::cout << std::endl << "Values in within this cluster size will be randomly generated and found.";
-		std::cout << std::endl << "Cluster size serves as a “pivot”? for the cluster with 1 or 2 more values";
-		std::cout << std::endl << "greater than cluster size than values less than cluster size.";
-		std::cout << std::endl << "(Recommended values 1-10, unless the list is very small): ";
-		std::cin >> inputCluster;
+		std::cout << "Cluster Radius: ";
+		std::cin >> clusterRadius;
 		std::cout << std::endl;
 
 		// initialization
 		SelfAdjustingList A = SelfAdjustingList();
-		A.uniqueRandomFill(inputSize, 0, upperBound);
+		A.uniqueRandomFill(inputSize, 1, upperBound);
 
-		if (inputCluster <= 1) { // Regular linear search
-			// record both the total number of iterative steps
-			// and the total number of check() operations
+		// Regular linear search
+		if (clusterRadius <= 1) {
 			{ // new block to handle creating and deleting temp variables
-				std::cout << "Searching for numbers 0 to Upper Bound once each, WITHOUT self-adjusting..." << std::endl;
+				std::cout << "Searching for numbers 1 to Max Value once each, WITHOUT self-adjusting..." << std::endl;
+				int findCalls = 0;
+				int found = 0;
 				long steps = 0;
-				for (int n = 0; n < upperBound; n++) {
+				for (int n = 1; n <= upperBound; n++) {
 					int temp = A.check(n);
-					if (temp >= 1) steps += temp;
+					findCalls++;
+					if (temp >= 1) {
+						steps += temp;
+						found++;
+					}
 					else steps += inputSize;
 				}
-				std::cout << "Done with dumb search in " << steps << " steps." << std::endl << std::endl;
+				std::cout << "Linear search tried to find " << findCalls <<
+					" numbers and actually found " << found << "," << std::endl;
+				std::cout << "with an average of " << (double)steps / (double)findCalls <<
+					" steps per find operation." << std::endl << std::endl;
 			}
 
 			{
-				// record both the total number of iterative steps
-				// and the total number of find() operations
-				std::cout << "Searching for numbers 0 to Upper Bound once each, with self-adjusting..." << std::endl;
+				std::cout << "Searching for numbers 1 to Max Value once each, with self-adjusting..." << std::endl;
+				int findCalls = 0;
+				int found = 0;
 				long steps = 0;
-				for (int n = 0; n < upperBound; n++) {
+				for (int n = 1; n <= upperBound; n++) {
 					int temp = A.find(n);
-					if (temp >= 1) steps += temp;
+					findCalls++;
+					if (temp >= 1) {
+						steps += temp;
+						found++;
+					}
 					else steps += inputSize;
 				}
-				std::cout << "Done with self-adjusting search in " << steps << " steps." << std::endl << std::endl;
+				std::cout << "Self-adjusting search tried to find " << findCalls <<
+					" numbers and actually found " << found << "," << std::endl;
+				std::cout << "with an average of " << (double)steps / (double)findCalls <<
+					" steps per find operation." << std::endl << std::endl;
 			}
 		}
-		else { // Clustered find
+
+		// Clustered find
+		else { 
 			{ // new block to handle creating and deleting temp variables
 				std::cout << "Finding elements in cluster WITHOUT self-adjusting..." << std::endl;
-				int current = 0;
+				int findCalls = 0;
+				int current = 1;
+				int found = 0;
 				long steps = 0;
-				int lower = (inputCluster - 1) / 2;
-				while (current < upperBound) {
-					current += rand() % inputCluster - lower;
-					if (current < 0)current = 0;
-					int temp = A.check(current);
-					if (temp >= 1) steps += temp;
-					else steps += inputSize;
+				while (current <= upperBound) {
+					for (int i = 0; i < clusterRadius; i++) {
+						int temp = A.check(current + i);
+						findCalls++;
+						if (temp >= 1) {
+							steps += temp;
+							found++;
+						}
+						else steps += inputSize;
+					}
+					current++;
 				}
-				std::cout << "Done with dumb search in " << steps << " steps." << std::endl << std::endl;
+				std::cout << "Linear search tried to find " << findCalls <<
+					" numbers and actually found " << found << "," << std::endl;
+				std::cout << "with an average of " << (double)steps / (double)findCalls <<
+					" steps per find operation." << std::endl << std::endl;
 			}
 
 			{
-				std::cout << "Finding elements in cluster and adjusting the list..." << std::endl;
-				int current = 0;
+				std::cout << "Finding elements in cluster with self-adjusting..." << std::endl;
+				int findCalls = 0;
+				int current = 1;
+				int found = 0;
 				long steps = 0;
-				int lower = (inputCluster - 1) / 2;
-				while (current < upperBound) {
-					current += rand() % inputCluster - lower;
-					if (current < 0)current = 0;
-					int temp = A.find(current);
-					if (temp >= 1) steps += temp;
-					else steps += inputSize;
+				while (current <= upperBound) {
+					for (int i = 0; i < clusterRadius; i++) {
+						int temp = A.find(current + i);
+						findCalls++;
+						if (temp >= 1) {
+							steps += temp;
+							found++;
+						}
+						else steps += inputSize;
+					}
+					current++;
 				}
-				std::cout << "Done with self-adjusting search in " << steps << " steps." << std::endl << std::endl;
+				std::cout << "Self-adjusting search tried to find " << findCalls <<
+					" numbers and actually found " << found << "," << std::endl;
+				std::cout << "with an average of " << (double)steps / (double)findCalls <<
+					" steps per find operation." << std::endl << std::endl;
 			}
 		}
 
 		std::cout << std::endl;
 		std::cout << "////////////////////          PROGRAM REPEATS...          ////////////////////" << std::endl;
-		//std::cout << std::endl << std::endl;
+		std::cout << std::endl << std::endl;
 
 		cycles++;
 	}
