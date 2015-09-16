@@ -1,12 +1,11 @@
 TODO:
 
-Finish writing explinations - Meghan
-Get cluster size = 1 to work - Stephen
 Change the location of inputed values from main() to the class - Stephen
-Copy the list so we can do multiple tests on the same initial random order - Chris
-	- Actually we can probably just repeat the whole program.
+
+Figure out a way to describe what happens when the list size is 0 but you still search for a lot of elements
+
 Do tests and write doc about test - Colaborative
 
-Maybe print the list if it's short?
-Also display steps per find().
-Explain what a "step" is.
+Maybe print the list if it's short? - Chris
+
+Explain what a "step" is in intro - MH
