@@ -56,8 +56,8 @@ int main() {
 		A.uniqueRandomFill(inputSize, 0, upperBound);
 
 		if (inputCluster <= 1) { // Regular linear search
-			// record both the total number of iterative steps
-			// and the total number of check() operations
+								 // record both the total number of iterative steps
+								 // and the total number of check() operations
 			{ // new block to handle creating and deleting temp variables
 				std::cout << "Searching for numbers 0 to Upper Bound once each, WITHOUT self-adjusting..." << std::endl;
 				long steps = 0;

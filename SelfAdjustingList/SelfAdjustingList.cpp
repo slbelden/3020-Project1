@@ -10,6 +10,7 @@
 #include <algorithm>    // std::random_shuffle
 #include <cstdlib>      // std::rand, std::srand
 #include <deque>
+#include <string>
 
 // Written by Chris
 int SelfAdjustingList::check(int f) const {
@@ -84,12 +85,31 @@ void SelfAdjustingList::fill(int f) {
 	data.push_front(f);
 }
 
+// Modified by Chris to make the output pretty.
+// Designed for inputs of int 99999 or below. Any larger will break formatting.
+// For our test cases, this should be fine.
 void SelfAdjustingList::print() {
+	std::string output = "";
+	std::string dummy = "   [";
 	int count = 0;
 	auto it = data.begin();
+
 	while (it != data.end()) {
-		std::cout << "      List element [" << count << "] : " << *it << std::endl;
+		if ( count % 10 == 0) {
+			output += dummy;
+			dummy = (count > 2) ? ("\n    ") : ("");
+		}
+		dummy += " " + std::to_string(*it) + ",";
 		count++;
 		it++;
 	}
+
+	output += dummy;
+	if (count > 1) {
+		output.pop_back();
+	}
+	output += " ]";
+
+	std::cout << "Printing list of " << count << " elements:" << std::endl;
+	std::cout << output << std::endl;
 }
