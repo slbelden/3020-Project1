@@ -55,6 +55,9 @@ int main() {
 		SelfAdjustingList A = SelfAdjustingList();
 		A.uniqueRandomFill(inputSize, 1, upperBound);
 
+		// The following is a great lesson in how NOT to design code
+		// We'll try to fix this horendous code duplication when we have time
+
 		// Regular linear search
 		if (clusterSize <= 1) {
 			{ // new block to handle creating and deleting temp variables
@@ -72,8 +75,9 @@ int main() {
 					else steps += inputSize;
 				}
 				std::cout << "Linear search tried to find " << findCalls <<
-					" numbers and actually found " << found << "," << std::endl;
-				std::cout << "with an average of " << (double)steps / (double)findCalls <<
+					" numbers and actually found " << found << "." << std::endl;
+				std::cout << "A total of " << steps << " steps were taken during this search," << std::endl;
+				std::cout << "which is an average of " << (double)steps / (double)findCalls <<
 					" steps per find operation." << std::endl << std::endl;
 			}
 
@@ -93,7 +97,8 @@ int main() {
 				}
 				std::cout << "Self-adjusting search tried to find " << findCalls <<
 					" numbers and actually found " << found << "," << std::endl;
-				std::cout << "with an average of " << (double)steps / (double)findCalls <<
+				std::cout << "A total of " << steps << " steps were taken during this search," << std::endl;
+				std::cout << "which is an average of " << (double)steps / (double)findCalls <<
 					" steps per find operation." << std::endl << std::endl;
 			}
 		}
@@ -108,8 +113,13 @@ int main() {
 				long steps = 0;
 				while (current <= upperBound) {
 					for (int i = 0; i < clusterSize; i++) {
-						int temp = A.check(current + i);
-						findCalls++;
+						int temp = 0;
+						// This loop will generate numbers greater than upperBound and shoot off the
+						// end of the list, so this check is here to prevent that.
+						if (current + i <= upperBound) {
+							temp = A.check(current + i);
+							findCalls++;
+						}
 						if (temp >= 1) {
 							steps += temp;
 							found++;
@@ -120,7 +130,8 @@ int main() {
 				}
 				std::cout << "Linear search tried to find " << findCalls <<
 					" numbers and actually found " << found << "," << std::endl;
-				std::cout << "with an average of " << (double)steps / (double)findCalls <<
+				std::cout << "A total of " << steps << " steps were taken during this search," << std::endl;
+				std::cout << "which is an average of " << (double)steps / (double)findCalls <<
 					" steps per find operation." << std::endl << std::endl;
 			}
 
@@ -132,8 +143,13 @@ int main() {
 				long steps = 0;
 				while (current <= upperBound) {
 					for (int i = 0; i < clusterSize; i++) {
-						int temp = A.find(current + i);
-						findCalls++;
+						int temp = 0;
+						// This loop will generate numbers greater than upperBound and shoot off the
+						// end of the list, so this check is here to prevent that.
+						if (current + i <= upperBound) {
+							temp = A.find(current + i);
+							findCalls++;
+						}
 						if (temp >= 1) {
 							steps += temp;
 							found++;
@@ -144,7 +160,8 @@ int main() {
 				}
 				std::cout << "Self-adjusting search tried to find " << findCalls <<
 					" numbers and actually found " << found << "," << std::endl;
-				std::cout << "with an average of " << (double)steps / (double)findCalls <<
+				std::cout << "A total of " << steps << " steps were taken during this search," << std::endl;
+				std::cout << "which is an average of " << (double)steps / (double)findCalls <<
 					" steps per find operation." << std::endl << std::endl;
 			}
 		}
