@@ -26,7 +26,7 @@ int main() {
 			std::cout << std::endl;
 			std::cout << "Explination of input variables:" << std::endl;
 			std::cout << "* List Length:  Number of elements in the list. Must be non-negative integer." << std::endl;
-			std::cout << "                (Recommended value 1-1000)" << std::endl;
+			std::cout << "                (Recommended value 1-1000; size 20 or less will be printed)" << std::endl;
 			std::cout << "* Max Value:    The list will be filled with non-repeating random numbers from" << std::endl;
 			std::cout << "                1 to this value. MUST be greater than or equal to List Length." << std::endl;
 			std::cout << "* Cluster Size: The number of sequential elements searched for before moving on" << std::endl;
@@ -54,17 +54,18 @@ int main() {
 		SelfAdjustingList A = SelfAdjustingList();
 		A.uniqueRandomFill(inputSize, 1, upperBound);
 
-		// The following is a great lesson in how NOT to design code
+		// Printing
+		if (inputSize <= 20) {
+			std::cout << "Printing the initial list:" << std::endl;
+			A.print();
+			std::cout << std::endl;
+		}
+
+		// The following is a great lesson in how NOT to design software
 		// We'll try to fix this horendous code duplication when we have time
 
-<<<<<<< HEAD
-		if (inputCluster <= 1) { // Regular linear search
-								 // record both the total number of iterative steps
-								 // and the total number of check() operations
-=======
 		// Regular linear search
 		if (clusterSize <= 1) {
->>>>>>> origin/master
 			{ // new block to handle creating and deleting temp variables
 				std::cout << "Searching for numbers 1 to Max Value once each, WITHOUT self-adjusting..." << std::endl;
 				int findCalls = 0;
@@ -105,6 +106,13 @@ int main() {
 				std::cout << "A total of " << steps << " steps were taken during this search," << std::endl;
 				std::cout << "which is an average of " << (double)steps / (double)findCalls <<
 					" steps per find operation." << std::endl << std::endl;
+
+				// Printing
+				if (inputSize <= 20) {
+					std::cout << "Printing the list after self-adjusting linear search:" << std::endl;
+					A.print();
+					std::cout << std::endl;
+				}
 			}
 		}
 
@@ -168,6 +176,13 @@ int main() {
 				std::cout << "A total of " << steps << " steps were taken during this search," << std::endl;
 				std::cout << "which is an average of " << (double)steps / (double)findCalls <<
 					" steps per find operation." << std::endl << std::endl;
+
+				// Printing
+				if (inputSize <= 20) {
+					std::cout << "Printing the list after self-adjusting clustered search:" << std::endl;
+					A.print();
+					std::cout << std::endl;
+				}
 			}
 		}
 

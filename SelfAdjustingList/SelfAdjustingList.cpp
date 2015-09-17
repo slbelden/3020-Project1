@@ -110,6 +110,6 @@ void SelfAdjustingList::print() {
 	}
 	output += " ]";
 
-	std::cout << "Printing list of " << count << " elements:" << std::endl;
+	//std::cout << "Printing list of " << count << " elements:" << std::endl;
 	std::cout << output << std::endl;
 }
