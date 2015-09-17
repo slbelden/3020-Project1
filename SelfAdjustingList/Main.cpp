@@ -21,6 +21,8 @@ int main() {
 			std::cout << "situations by generating a random list of unique ints, then searching through" << std::endl;
 			std::cout << "that list both with and without the self-adjusting function of the list." << std::endl;
 			std::cout << "The same initial random order of elements is used for both tests." << std::endl;
+			std::cout <<  "The total and average number of steps taken to search will be returned." << std::endl ;
+			std::cout <<  "A step is counted each time a new element is checked at while searching.";
 			std::cout << std::endl;
 			std::cout << "Explination of input variables:" << std::endl;
 			std::cout << "* List Length -    The length of the list. Must be non-negative integer." << std::endl;
@@ -31,7 +33,7 @@ int main() {
 			std::cout << "* Cluster Radius - While searching, the number being searched for may increace" << std::endl;
 			std::cout << "                   or decreace by a maximum of this ammount. This value also" << std::endl;
 			std::cout << "                   controls how long the cluster is centered around one value" << std::endl;
-			std::cout << "                   before going on to the next, somaking this value larger will" << std::endl;
+			std::cout << "                   before going on to the next, so making this value larger will" << std::endl;
 			std::cout << "                   result in more find calls." << std::endl;
 			std::cout << "                   (Recommended values 1-10, unless the list is small)" << std::endl;
 			std::cout << std::endl;
