@@ -5,7 +5,6 @@
 // 2015-Sept-10
 
 #include <iostream>
-#include <cstdlib>
 #include "SelfAdjustingList.h"
 
 int main() {
@@ -18,20 +17,20 @@ int main() {
 		// Only display this intro text on the first run through the program
 		if (cycles <= 0) {
 			std::cout << "This program demonstrates the efficiency of self-adjusting lists in clustered" << std::endl;
-			std::cout << "searches by generating a random list of unique ints, then repeatedly searching" << std::endl;
-			std::cout << "through that list for groups of sequential numbers. For example, a Cluster Size" << std::endl;
-			std::cout << "of 4 would search for the following numbers in this order:" << std::endl;
+			std::cout << "searches by generating a random list of unique positive ints, then repeatedly" << std::endl;
+			std::cout << "searching through that list for groups of sequential numbers. For example," << std::endl;
+			std::cout << "a Cluster Size of 4 would search for the following numbers in this order:" << std::endl;
 			std::cout << "1,2,3,4, 2,3,4,5, 3,4,5,6, ... until the maximum value is reached." << std::endl;
 			std::cout << "The total and average number of steps taken to search are displayed." << std::endl;
 			std::cout << "A step is counted each time a new element is visited in the list." << std::endl;
 			std::cout << std::endl;
 			std::cout << "Explination of input variables:" << std::endl;
 			std::cout << "* List Length:  Number of elements in the list. Must be non-negative integer." << std::endl;
-			std::cout << "                (Recommended value 1-1000; inputing 0 currently doesn't work.)" << std::endl;
-			std::cout << "* Max Value:    The list will be filled with non-repeating, random numbers from" << std::endl;
+			std::cout << "                (Recommended value 1-1000)" << std::endl;
+			std::cout << "* Max Value:    The list will be filled with non-repeating random numbers from" << std::endl;
 			std::cout << "                1 to this value. MUST be greater than or equal to List Length." << std::endl;
 			std::cout << "* Cluster Size: The number of sequential elements searched for before moving on" << std::endl;
-			std::cout << "                to the next series. (Recommended values 1-30)" << std::endl;
+			std::cout << "                to the next series. (Recommended value 1-30)" << std::endl;
 			std::cout << std::endl;
 			std::cout << "Some interesting values to try:" << std::endl;
 			std::cout << "* Max Value equal to List Length - ideal situation with no misses" << std::endl;

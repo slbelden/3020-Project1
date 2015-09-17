@@ -1,11 +1,4 @@
 TODO:
 
-Change the location of inputed values from main() to the class - Stephen
-
-Figure out a way to describe what happens when the list size is 0 but you still search for a lot of elements
-
-Do tests and write doc about test - Colaborative
-
-Maybe print the list if it's short? - Chris
-
-Explain what a "step" is in intro - MH
+Change the location of inputed values from main to the class - Stephen
+Print the list if it's short? - Chris
