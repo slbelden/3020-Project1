@@ -1,4 +1,0 @@
-TODO:
-
-Change the location of inputed values from main to the class - Stephen
-Write why we chose cluster sizes and list lengths that we did - Chris
