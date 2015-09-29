@@ -2,7 +2,7 @@
 // Stephen Belden
 // Chris Ruiz
 // Meghan Haukaas
-// 2015-Sept-10
+// 2015-Sept-28
 
 #include <iostream>
 #include "SelfAdjustingList.h"
@@ -60,9 +60,6 @@ int main() {
 			A.print();
 			std::cout << std::endl;
 		}
-
-		// The following is a great lesson in how NOT to design software
-		// We'll try to fix this horendous code duplication when we have time
 
 		// Regular linear search
 		if (clusterSize <= 1) {
