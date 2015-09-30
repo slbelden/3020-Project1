@@ -1,8 +1,5 @@
 # 3020-Project1
 
-Project for Professor Bailey's COSC 3020 class,
-Fall 2015 at University of Wyoming
-
 Task:  
 Write a linked-list implementation of self-adjusting lists. In a self-adjusting list, all insertions are performed at the front. A self-adjusting list adds a find operation, and when an element is accessed by a find, it is moved to the front of the list without changing the relative order of the other items.  
 Demonstrate a case in which a self-adjusting container finds elements, on average, faster than a static container.  
